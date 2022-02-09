@@ -1,20 +1,26 @@
-import './styles/index.css';
-import Footer from './components/container/Footer';
-import TimerShower from './components/TimerShower';
-
-
+import HeaderComp from "./components/headerbar/HeaderComp";
+import TimeGetter from "./components/timegetter/TimeGetter";
+import Wrapper from "./components/wrapper/Wrapper";
+import "./styles/index.css";
+import Main from './components/main/Main'
+import { TimeProvider } from "./context/timeContext";
 
 function App() {
   return (
-    <div className="App">
-      <div className="wrapper w-full h-screen bg-red-400 grid place-content-center">
-        <h1 className='text-5xl font-bold tracking-[20px]'>TIM</h1>
-        <div className="tim w-96 p-6 bg-green-300 flex flex-col gap-1">
-            <TimerShower />
-            <Footer />
-        </div>
-      </div>
-    </div>
+    <TimeProvider>
+
+    <Wrapper>
+      <HeaderComp />
+      <Main>
+      <TimeGetter />
+      <div className="w-full col-span-2 bg-red-500 h-[300px]">fum</div>
+      <div className="w-full col-span-3 bg-blue-500 h-[300px]">fo</div>
+      <div className="w-full col-span-2 bg-green-500 h-[300px]">fe</div>
+      <div className="w-full col-span-1 bg-red-500 h-[300px]">fi</div>
+      
+      </Main>
+    </Wrapper>
+    </TimeProvider>
   );
 }
 
