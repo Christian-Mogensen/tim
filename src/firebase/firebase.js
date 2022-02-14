@@ -19,6 +19,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
+import { useState } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBRd2E_a6A-41Q3kTf0pL4_brNVjtgfR7Y",
@@ -34,6 +35,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const googleProvider = new GoogleAuthProvider();
+
 
 const signInWithGoogle = async () => {
   try {

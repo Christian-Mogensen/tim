@@ -1,6 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import AlreadyAcc from "../../components/btns/AlreadyAcc";
+import Form from "../../components/form/Form";
+import FormBtn from "../../components/form/FormBtn";
+import FormContainer from "../../components/form/FormContainer";
+import FormHeader from "../../components/form/FormHeader";
+import FormInput from "../../components/form/FormInput";
+import MailIcon from "../../assets/img/icons/MailIcon";
+import PasswordIcon from "../../assets/img/icons/PasswordIcon";
+import UserIcon from "../../assets/img/icons/UserIcon";
 import {
   auth,
   registerWithEmailAndPassword,
@@ -13,7 +22,7 @@ function Register() {
   const [name, setName] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-
+const [errormsg, setErrormsg] = useState('')
   const register = () => {
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password);
@@ -25,44 +34,36 @@ function Register() {
   }, [user, loading]);
 
   return (
-    <div className="register">
-      <div className="register__container">
-        <input
+    <Form>
+      <FormContainer>
+        <FormHeader val="Sign up" />
+        <FormInput
+          icon={<UserIcon value={name} />}
           type="text"
-          className="register__textBox"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
         />
-        <input
+        <FormInput
+          icon={<MailIcon value={email} />}
           type="text"
-          className="register__textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
-        <input
+        <FormInput
+          icon={<PasswordIcon value={password} />}
           type="password"
-          className="register__textBox"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button className="register__btn" onClick={register}>
-          Register
-        </button>
-        <button
-          className="register__btn register__google"
-          onClick={signInWithGoogle}
-        >
-          Register with Google
-        </button>
+        <FormBtn onClick={register} val="Continue" />
+        <FormBtn onClick={signInWithGoogle} val="Sign in with Google" />
 
-        <div>
-          Already have an account? <Link to="/signin">Login</Link> now.
-        </div>
-      </div>
-    </div>
+        <AlreadyAcc spcplacement="place-self-end" />
+      </FormContainer>
+    </Form>
   );
 }
 
