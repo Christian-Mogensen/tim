@@ -1,7 +1,7 @@
 import React from "react";
 
 const Wrapper = ({ children }) => {
-  return <div className="w-full min-h-screen bg-gray-900">{children}</div>;
+  return <div className="min-h-screen">{children}</div>;
 };
 
 export default Wrapper;
