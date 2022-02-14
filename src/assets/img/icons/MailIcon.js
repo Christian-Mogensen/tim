@@ -7,6 +7,7 @@ function MailIcon({ value }) {
       width="17"
       height="13"
       viewBox="0 0 17 13"
+      className=" transition-all"
     >
       <path
         fill={value ? "#707070" : "none"}
