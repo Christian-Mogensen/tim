@@ -1,6 +1,6 @@
 import { getDate, getMonth, getYear } from "date-fns";
 import { format } from "date-fns/esm";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { TimeContext } from "../../context/timeContext";
 
 const TimerShower = () => {
@@ -8,33 +8,14 @@ const TimerShower = () => {
     time,
     startMin,
     startHour,
-    startDay,
-    startMonth,
     starter,
-    s,
-    setS,
-    endDay,
     endMin,
     endHour,
-    endMonth,
-    startSecond,
-    endSecond,
     ender,
-    setStartSecond,
   } = useContext(TimeContext);
   const starttimesetter = `${startHour}:${startMin}`;
   const endtimesetter = `${endHour}:${endMin}`;
-// if(Window !== undefined){
-//   const timeH = document.querySelector("#timeHour").textContent
-//   const timeM = document.querySelector("#timeMinute").textContent;
-//   const timeS = document.querySelector("#timeSecond").textContent;
-// const numTimeH = parseInt(timeH)
-// const numTimeM = parseInt(timeM)
-// const numTimeS = parseInt(timeS)
 
-// const pengeimin = 200 / 60
-//   console.log(numTimeH, numTimeM, numTimeS);
-//   console.log(pengeimin);}
 const d = getDate(new Date())
 const m = getMonth(new Date())
 const y = getYear(new Date())
@@ -72,7 +53,6 @@ const fm = format(m, "MMMM")
             <span id="timeSecond">
               {("0" + Math.floor((time / 1000) % 60)).slice(-2)}
             </span>
-            {/* <span>{("0" + (time/10)%1000).slice(-2)}</span> */}
           </h3>
         
       </div></>)}

@@ -6,9 +6,9 @@ import {
   getMonth,
   getSeconds,
 } from "date-fns";
-import React, { useContext, useEffect } from "react";
-import { FaPlay, FaStop } from "react-icons/fa";
-import { TimeContext } from "../../context/timeContext";
+import React, { useContext, useEffect, useState } from "react";
+import { FaPlay, FaStop,FaArchive } from "react-icons/fa";
+import { TimeContext } from "../../../context/timeContext";
 import FooterBtn from "./FooterBtn";
 
 const Footer = () => {
@@ -33,11 +33,8 @@ const Footer = () => {
     setStartSecond,
     setEndSecond,
     setEnder,
-    ender,
-    s,
-    setS,
-    time,
-    kill,setKill,
+    kill,
+    setKill,
     setTime,
     start,
     setStart,
@@ -55,6 +52,7 @@ const Footer = () => {
     }
     return () => clearInterval(interval);
   }, [start, setTime]);
+  const [archive, setArchive] = useState(false);
 
   const funcStart = () => {
     setStartSecond(sec);
@@ -75,16 +73,37 @@ const Footer = () => {
     setEndMonth(fm);
     setTrigger(!trigger);
     setEnder(true);
-    setStart(false)
-    setKill(!kill)
+    setStart(false);
+    setKill(!kill);
+    setArchive(!archive)
   };
+  const funcArchive = () => {
+    console.log('stuff is archive');
+  }
 
   return (
     <footer className="grid w-full pt-2 mt-auto place-self-center">
-      {!trigger ? (
-        <FooterBtn fun={funcStart} icon={<FaPlay />} />
+      {!archive ? (
+        <div className="w-full">
+          {!trigger ? (
+            <FooterBtn fun={funcStart} icon={<FaPlay />} />
+          ) : (
+            <FooterBtn
+              activeStop="bg-gray-50 text-black stopbtnpulse"
+              fun={funcStop}
+              icon={<FaStop />}
+            />
+          )}
+        </div>
       ) : (
-        <FooterBtn activeStop='bg-gray-50 text-black stopbtnpulse' fun={funcStop} icon={<FaStop />} />
+        <div className="w-full ">
+          
+            <FooterBtn
+              activeStop="bg-gray-50 text-inherit"
+              fun={funcArchive}
+              icon={<FaArchive />}
+            />
+        </div>
       )}
     </footer>
   );
