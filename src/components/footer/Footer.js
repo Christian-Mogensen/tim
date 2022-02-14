@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className='
     bg-gray-50 px-3 h-14 flex items-center'>
-        <ul className='grid grid-cols-3 gap-2 w-full'>
+        <ul className='grid grid-cols-3 gap-2 w-full max-w-7xl m-auto'>
             <li className=' basis-full '><LogoBtn /> </li>
             <li className=' place-self-center text-[12px]'>copyright cmless</li>
         </ul>
