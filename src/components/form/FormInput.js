@@ -6,7 +6,7 @@ const FormInput = ({icon,type, value, onChange, placeholder}) => {
     <div className="relative w-full">
     <input
           type={type}
-          className='p-2 pl-10 rounded bg-gray-50 relative outline-none placeholder:text-[12px] w-full'
+          className='p-2 pl-10 rounded transition-all bg-gray-50 relative outline-none placeholder:text-[12px] w-full'
           value={value}
           onChange={onChange}
           placeholder={placeholder}

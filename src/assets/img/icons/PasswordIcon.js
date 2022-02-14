@@ -7,6 +7,7 @@ function PasswordIcon({ value }) {
       width="17"
       height="17"
       viewBox="0 0 17 17"
+      className=" transition-all"
     >
       <path
         fill={value ? "#707070" : "none"}

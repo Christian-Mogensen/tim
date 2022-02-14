@@ -7,6 +7,7 @@ function LogOut() {
       width="18.19"
       height="16"
       viewBox="0 0 18.19 16"
+      className=" transition-all"
     >
       <path
         fill="#707070"
