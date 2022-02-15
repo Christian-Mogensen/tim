@@ -1,9 +1,10 @@
 import React from 'react'
 
-const FormBtn = ({val, onClick}) => {
+const FormBtn = ({val, onClick, customwidth, type, customgridSE}) => {
   return (
     <button
-    className={`bg-gray-700 text-white rounded h-8 `}
+    type="submit"
+    className={`bg-gray-700 text-white rounded h-8 ${customwidth} ${customgridSE}`}
     onClick={onClick}
   >
     {val}
