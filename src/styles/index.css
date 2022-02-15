@@ -18,3 +18,22 @@
     }
     
 }
+
+.graphicelem{
+    z-index: 2;
+    position: relative;
+}
+.graphicelem:first-of-type::after{
+    display: none;
+}
+.graphicelem::after{
+    position: absolute;
+    content: '';
+    width: 50px;
+    height: 3px;
+    z-index: 1;
+    left:-50px;
+    top:50%;
+    transform: translateY(-50%);
+    background: rgb(75 85 99);
+}

@@ -39,8 +39,8 @@ const Nav = () => {
   const urlparampath = urlparam.pathname;
   if (urlparampath === "/") {
     return (
-      <nav className="px-3 h-14 bg-gray-50 w-full flex items-center">
-        <ul className="flex gap-2 items-center w-full  max-w-7xl m-auto">
+      <nav className="flex items-center w-full px-3 h-14 bg-gray-50">
+        <ul className="flex items-center w-full gap-2 m-auto max-w-7xl">
           <li className="mr-auto">
             <Link to="/">
               <LogoBtn />
@@ -63,15 +63,15 @@ const Nav = () => {
             <>
               <li>
                 <Link to="/dashboard">
-                  <div className="flex gap-2 items-center">
-                    <div className="h-6 w-6 bg-red-500 rounded-full"></div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 bg-red-500 rounded-full"></div>
                     <div>{name}</div>
                   </div>
                 </Link>
               </li>
               <div className="h-8 w-[1px] bg-gray-600"></div>
               <li
-                className="flex gap-2 items-center cursor-pointer"
+                className="flex items-center gap-2 cursor-pointer"
                 onClick={logout}
               >
                 <span>Log out</span>
@@ -85,10 +85,10 @@ const Nav = () => {
       </nav>
     );
   }
-  if (urlparampath === "/signin") {
+  if (urlparampath === "/signin" || urlparampath === "/reset") {
     return (
-      <nav className="px-3 h-14 bg-gray-50 w-full flex items-center">
-        <ul className="flex gap-2 items-center w-full  max-w-7xl m-auto">
+      <nav className="flex items-center w-full px-3 h-14 bg-gray-50">
+        <ul className="flex items-center w-full gap-2 m-auto max-w-7xl">
           <li className="mr-auto">
             <Link to="/">
               <LogoBtn />
@@ -100,15 +100,15 @@ const Nav = () => {
             <>
               <li>
                 <Link to="/dashboard">
-                  <div className="flex gap-2 items-center">
-                    <div className="h-6 w-6 bg-red-500 rounded-full"></div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 bg-red-500 rounded-full"></div>
                     <div>{name}</div>
                   </div>
                 </Link>
               </li>
               <div className="h-8 w-[1px] bg-gray-600"></div>
               <li
-                className="flex gap-2 items-center cursor-pointer"
+                className="flex items-center gap-2 cursor-pointer"
                 onClick={logout}
               >
                 <span>Log out</span>
@@ -124,8 +124,8 @@ const Nav = () => {
   }
   if (urlparampath === "/signup") {
     return (
-      <nav className="px-3 h-14 bg-gray-50 w-full flex items-center">
-        <ul className="flex gap-2 items-center w-full  max-w-7xl m-auto">
+      <nav className="flex items-center w-full px-3 h-14 bg-gray-50">
+        <ul className="flex items-center w-full gap-2 m-auto max-w-7xl">
           <li className="mr-auto">
             <Link to="/">
               <LogoBtn />
@@ -140,10 +140,10 @@ const Nav = () => {
       </nav>
     );
   }
-  if (urlparampath === "/dashboard") {
+  if (urlparampath === "/dashboard" || urlparampath === "/dashboard/createprojectform") {
     return (
-      <nav className="px-3 h-14 bg-gray-50 w-full flex items-center">
-        <ul className="flex gap-2 items-center w-full  max-w-7xl m-auto">
+      <nav className="flex items-center w-full px-3 h-14 bg-gray-50">
+        <ul className="flex items-center w-full gap-2 m-auto max-w-7xl">
           <li className="mr-auto">
             <Link to="/">
               <LogoBtn />
@@ -155,15 +155,15 @@ const Nav = () => {
             <>
               <li>
                 <Link to="/dashboard">
-                  <div className="flex gap-2 items-center">
-                    <div className="h-6 w-6 bg-red-500 rounded-full"></div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 bg-red-500 rounded-full"></div>
                     <div>{name}</div>
                   </div>
                 </Link>
               </li>
               <div className="h-8 w-[1px] bg-gray-600"></div>
               <li
-                className="flex gap-2 items-center cursor-pointer"
+                className="flex items-center gap-2 cursor-pointer"
                 onClick={logout}
               >
                 <span>Log out</span>

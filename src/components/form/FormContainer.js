@@ -1,8 +1,8 @@
 import React from 'react'
 
-const FormContainer = ({children}) => {
+const FormContainer = ({children, onSubmit}) => {
   return (
-    <div className='grid grid-cols-1 row-auto gap-8 p-2 w-full'>{children}</div>
+    <form onSubmit={onSubmit} className='grid w-full grid-cols-1 row-auto gap-8 p-2 mt-12'>{children}</form>
   )
 }
 

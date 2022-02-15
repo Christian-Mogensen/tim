@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
-import MailIcon from '../../assets/img/icons/MailIcon';
+import MailIcon from "../../assets/img/icons/MailIcon";
 import NoAcc from "../../components/btns/NoAcc";
 import Form from "../../components/form/Form";
 import FormBtn from "../../components/form/FormBtn";
 import FormContainer from "../../components/form/FormContainer";
 import FormHeader from "../../components/form/FormHeader";
 import FormInput from "../../components/form/FormInput";
-import PasswordIcon from '../../assets/img/icons/PasswordIcon'
+import PasswordIcon from "../../assets/img/icons/PasswordIcon";
+
 import {
   auth,
   logInWithEmailAndPassword,
-  signInWithGoogle
+  signInWithGoogle,
 } from "../../firebase/firebase";
+import BackComp from "../../components/btns/BackComp";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,10 +32,11 @@ function Login() {
 
   return (
     <Form>
+      <BackComp href="/" val="Back to frontpage" />
       <FormContainer>
         <FormHeader val="Sign in" />
         <FormInput
-          icon={<MailIcon value={email}/>}
+          icon={<MailIcon value={email} />}
           type="text"
           className="login__textBox"
           value={email}
@@ -41,7 +44,7 @@ function Login() {
           placeholder="E-mail Address"
         />
         <FormInput
-        icon={<PasswordIcon value={password}/>}
+          icon={<PasswordIcon value={password} />}
           type="password"
           className="login__textBox"
           value={password}

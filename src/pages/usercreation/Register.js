@@ -15,6 +15,7 @@ import {
   registerWithEmailAndPassword,
   signInWithGoogle,
 } from "../../firebase/firebase";
+import BackComp from "../../components/btns/BackComp";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -22,7 +23,7 @@ function Register() {
   const [name, setName] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-const [errormsg, setErrormsg] = useState('')
+  const [errormsg, setErrormsg] = useState("");
   const register = () => {
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password);
@@ -35,6 +36,7 @@ const [errormsg, setErrormsg] = useState('')
 
   return (
     <Form>
+      <BackComp href="/" val="Back to frontpage" />
       <FormContainer>
         <FormHeader val="Sign up" />
         <FormInput
