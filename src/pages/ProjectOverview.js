@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import BackComp from "../components/btns/BackComp";
 import { auth, db } from "../firebase/firebase";
 
-const Prototype = () => {
+const ProjectOverview = () => {
   const { slug } = useParams();
 const [projectName, setProjectName] = useState()
 
@@ -49,4 +49,4 @@ const userId = user[0]?.uid;
   );
 }
 
-export default Prototype;
+export default ProjectOverview;

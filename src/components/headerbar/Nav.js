@@ -1,7 +1,7 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import LogOut from "../../assets/img/icons/LogOut";
 import { auth, db, logout } from "../../firebase/firebase";
 import AlreadyAcc from "../btns/AlreadyAcc";
@@ -17,7 +17,7 @@ const Nav = () => {
 
   const fetchUserName = async () => {
     try {
-      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+      const q = query(collection(db, "users"), where("uid", "==", user.uid));
       const doc = await getDocs(q);
       const data = doc.docs[0].data();
 
@@ -35,8 +35,36 @@ const Nav = () => {
     fetchUserName();
   }, [user, loading]);
   const urlparam = useLocation();
+  const {slug } = useParams()
+
   console.log();
   const urlparampath = urlparam.pathname;
+  const [projectName, setProjectName] = useState()
+
+
+const userId = user?.uid;
+  useEffect(()=>{
+    (async()=>{
+
+      const docRef = doc(db, "users", userId, `project/${slug}`);
+      const docSnap = await getDoc(docRef);
+      const docData = docSnap.data()
+
+      console.log(docData.project);
+      if (docSnap.exists()) {
+        setProjectName(docData.project)
+        // setStateAlphaVal({x:docData.brightness.x})
+      // setColorTheme(docData.color)
+      // setScene(docData.scene)
+      // console.log(stateAlphaVal);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    })()
+  },[])
+
+console.log(urlparampath);
   if (urlparampath === "/") {
     return (
       <nav className="flex items-center w-full px-3 h-14 bg-gray-50">
@@ -141,6 +169,42 @@ const Nav = () => {
     );
   }
   if (urlparampath === "/dashboard" || urlparampath === "/dashboard/createprojectform") {
+    return (
+      <nav className="flex items-center w-full px-3 h-14 bg-gray-50">
+        <ul className="flex items-center w-full gap-2 m-auto max-w-7xl">
+          <li className="mr-auto">
+            <Link to="/">
+              <LogoBtn />
+            </Link>
+          </li>
+          {!user ? (
+            <AlreadyAcc />
+          ) : (
+            <>
+              <li>
+                <Link to="/dashboard">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 bg-red-500 rounded-full"></div>
+                    <div>{name}</div>
+                  </div>
+                </Link>
+              </li>
+              <div className="h-8 w-[1px] bg-gray-600"></div>
+              <li
+                className="flex items-center gap-2 cursor-pointer"
+                onClick={logout}
+              >
+                <span>Log out</span>
+                <div className="w-3">
+                  <LogOut />
+                </div>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
+    );
+  } else{
     return (
       <nav className="flex items-center w-full px-3 h-14 bg-gray-50">
         <ul className="flex items-center w-full gap-2 m-auto max-w-7xl">

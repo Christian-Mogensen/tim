@@ -37,3 +37,7 @@
     transform: translateY(-50%);
     background: rgb(75 85 99);
 }
+
+.yearhovereffect:hover .hovereffectchild {
+    fill: white;
+}

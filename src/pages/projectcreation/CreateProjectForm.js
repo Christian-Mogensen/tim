@@ -1,6 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { useContext, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate, useParams } from "react-router-dom";
+import BriefIcon from "../../assets/img/icons/BriefIcon";
 import DocumentIcon from "../../assets/img/icons/DocumentIcon";
+import DollarIcon from "../../assets/img/icons/DollarIcon";
 import MailIcon from "../../assets/img/icons/MailIcon";
+import MobileIcon from "../../assets/img/icons/MobileIcon";
 import UserIcon from "../../assets/img/icons/UserIcon";
 import BackComp from "../../components/btns/BackComp";
 import Form from "../../components/form/Form";
@@ -8,19 +14,12 @@ import FormBtn from "../../components/form/FormBtn";
 import FormContainer from "../../components/form/FormContainer";
 import FormHeader from "../../components/form/FormHeader";
 import FormInput from "../../components/form/FormInput";
-import CircleItem from "../projectcreation/CircleItem";
-import MobileIcon from "../../assets/img/icons/MobileIcon";
-import DollarIcon from "../../assets/img/icons/DollarIcon";
-import BriefIcon from "../../assets/img/icons/BriefIcon";
-import FormSubheader from "./FormSubheader";
 import { ProjectContext } from "../../context/createProject";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase/firebase";
-import { useNavigate, useParams } from "react-router-dom";
-import { doc, setDoc } from "firebase/firestore";
-
-
-
+import CircleItem from "../projectcreation/CircleItem";
+import FormSubheader from "./FormSubheader";
+// const firebase = require('firebase-admin')
+import firebase from 'firebase/app'
 
 const activestyle = "w-[15px] h-[15px] bg-gray-600 graphicelem"
 
@@ -56,8 +55,10 @@ const CreateProjectForm = () => {
         phone: clientPhonenumber,
         rate: rate,
         brief: brief,
+        creation: serverTimestamp() 
       });
     };
+    
   const triggerFunc = (e) => {
     e.preventDefault()
     createProject()

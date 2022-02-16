@@ -56,7 +56,7 @@ function Login() {
         </div>
 
         <FormBtn
-          onClick={() => logInWithEmailAndPassword(email, password)}
+          onClick={(e) =>{e.preventDefault(); logInWithEmailAndPassword(email, password)}}
           val="Continue"
         />
         <FormBtn onClick={signInWithGoogle} val="Sign in with Google" />
