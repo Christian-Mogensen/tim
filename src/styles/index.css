@@ -41,3 +41,9 @@
 .yearhovereffect:hover .hovereffectchild {
     fill: white;
 }
+.transitionspeed{
+    transition: 0.15s ease-in;
+}
+.customgridarea{
+    grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}

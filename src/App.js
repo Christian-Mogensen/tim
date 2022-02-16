@@ -12,6 +12,7 @@ import Register from "./pages/usercreation/Register";
 import Reset from "./pages/usercreation/Resetpw";
 import Dashboard from "./pages/usercreation/userdashboard/Dashboard";
 import "./styles/index.css";
+import "./styles/react-tabs.css"
 
 function App() {
   return (
@@ -27,7 +28,6 @@ function App() {
         <Route exact path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/:slug" element={<ProjectOverview />} />
           <Route path="/dashboard/createprojectform" element={<CreateProjectForm />} />
-        
       </Routes>
       </Main>
       <Footer />

@@ -20,6 +20,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBRd2E_a6A-41Q3kTf0pL4_brNVjtgfR7Y",
@@ -64,6 +65,7 @@ const logInWithEmailAndPassword = async (email, password) => {
     console.error(err);
     alert(err.message);
   }
+  
 };
 
 const registerWithEmailAndPassword = async (name, email, password) => {
