@@ -2,14 +2,13 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
-import NavBtn from "../../../components/btns/NavBtn";
-import { auth, db } from "../../../firebase/firebase";
 import ArrowDown from "../../../assets/img/icons/ArrorDown";
 import DocIcon from "../../../assets/img/icons/DocIcon";
-import BackComp from "../../../components/btns/BackComp";
-import PaginationBtn from "../../../components/btns/PaginationBtn";
 import PaginationLeft from "../../../assets/img/icons/PaginationLeft";
 import PaginationRight from "../../../assets/img/icons/PaginationRight";
+import NavBtn from "../../../components/btns/NavBtn";
+import PaginationBtn from "../../../components/btns/PaginationBtn";
+import { auth, db } from "../../../firebase/firebase";
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -39,7 +38,7 @@ function Dashboard() {
   const [emptyProj, setEmptyProj] = useState();
   useEffect(() => {
     (async () => {
-      const userId = await user?.uid;
+      const userId = user?.uid;
       const querySnapshot = await getDocs(
         collection(db, "users", userId, "project")
       );
@@ -53,7 +52,6 @@ function Dashboard() {
     })();
   }, [user]);
 
-  console.log(emptyProj);
   const [yeardatefilter, setYeardatefilter] = useState(2022);
   return (
     <div className="max-w-7xl">
@@ -84,9 +82,9 @@ function Dashboard() {
           <div className="  min-h-[500px]">
             <div className="grid gap-1 w-full">
               {projectList.map((p, i) => (
-                <Link to={`${p}`}>
+                <Link key={i} to={`${p}`}>
                   <button
-                    key={i}
+                    
                     className="w-full p-2 text-left bg-gray-100 hover:bg-gray-200 transition-all relative rounded first-letter:capitalize"
                   >
                     {p}

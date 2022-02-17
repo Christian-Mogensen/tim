@@ -1,17 +1,21 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import BriefIcon from "../assets/img/icons/BriefIcon";
+import DocumentIcon from "../assets/img/icons/DocumentIcon";
+import DollarIcon from "../assets/img/icons/DollarIcon";
+import MailIcon from "../assets/img/icons/MailIcon";
+import MobileIcon from "../assets/img/icons/MobileIcon";
+import UserIcon from "../assets/img/icons/UserIcon";
 import BackComp from "../components/btns/BackComp";
 import { auth, db } from "../firebase/firebase";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import OverviewGridItem from "./projectcreation/OverviewGridItem";
-import DocumentIcon from "../assets/img/icons/DocumentIcon";
-import UserIcon from "../assets/img/icons/UserIcon";
-import MailIcon from "../assets/img/icons/MailIcon";
-import MobileIcon from '../assets/img/icons/MobileIcon'
-import DollarIcon from '../assets/img/icons/DollarIcon'
-import BriefIcon from '../assets/img/icons/BriefIcon'
+import NavBtn from "../components/btns/NavBtn";
+import PaginationBtn from "../components/btns/PaginationBtn";
+import LogIcon from "../assets/img/icons/LogIcon";
+import PaginationLeft from "../assets/img/icons/PaginationLeft";
+import PaginationRight from "../assets/img/icons/PaginationRight";
 
 const ProjectOverview = () => {
   const { slug } = useParams();
@@ -23,7 +27,6 @@ const ProjectOverview = () => {
   const [rate, setRate] = useState();
 
   const user = useAuthState(auth);
-  // console.log(user);
   const userId = user[0]?.uid;
   useEffect(() => {
     (async () => {
@@ -47,60 +50,142 @@ const ProjectOverview = () => {
   }, []);
 
   const [tab, setTab] = useState(true);
+  const [emptyLog, setEmptyLog] = useState();
+  const [logList, setLogList] = useState([]);
 
+  // useEffect(()=>{
+  //   setLogList(['fi', 'fy','fo','fum'])
+  //   setEmptyLog(logList.length >= 0);
+
+  // }, [])
+  useEffect(() => {
+    (async () => {
+      const querySnapshot = await getDocs(
+        collection(db, "users", userId, "project", slug, "logs")
+      );
+      querySnapshot.forEach((doc) => {
+        console.log(doc.id);
+        console.log(doc.data());
+        console.log(logList);
+        setLogList((prevLogList) => [...prevLogList, doc.id]);
+        setEmptyLog(logList.length >= 0);
+      });
+    })();
+  }, [user]);
   return (
     <div className="max-w-xl m-auto">
-    <div className="flex items-center justify-between w-full">
-
-      <BackComp href="/dashboard" />
-      <div className="">
-        <span className="text-[12px] tracking-widest capitalize ">
-          {projectName} / logs
-        </span>
+      <div className="flex items-center justify-between w-full">
+        <BackComp href="/dashboard" />
+        <div className="">
+          <span className="text-[12px] tracking-widest capitalize ">
+            {projectName} / logs
+          </span>
+        </div>
       </div>
-      </div>
-<div className="h-[42px]">
-
-      <div>
-        <button
-          className={`transitionspeed w-[120px] capitalize p-2 border-b-2 ${
-            tab
-            ? "tracking-widest font-bold  text-md border-gray-600 text-gray-600"
-            : "text-[10px] border-transparent h-[44px]"
-          } `}
-          onClick={() => setTab(!tab)}
-          >
-          overview
-        </button>
-        <button
-          className={`transitionspeed w-[120px] capitalize p-2 border-b-2 ${
-            !tab
-            ? "tracking-widest font-bold  text-md border-gray-600 text-gray-600"
-            : "text-[10px] border-transparent h-[44px]"
-          } `}
-          onClick={() => setTab(!tab)}
-          >
-          logs
-        </button>
-      </div>
+      <div className="h-[42px]">
+        <nav className="flex justify-between items-center">
+          <div>
+            <button
+              className={`transitionspeed w-[120px] capitalize p-2 ${
+                tab
+                  ? "tracking-widest font-bold  text-md text-gray-600"
+                  : "text-[10px] h-[44px]"
+              } `}
+              onClick={() => setTab(!tab)}
+            >
+              overview
+            </button>
+            <button
+              className={`transitionspeed w-[120px] capitalize p-2 ${
+                !tab
+                  ? "tracking-widest font-bold  text-md text-gray-600"
+                  : "text-[10px] h-[44px]"
+              } `}
+              onClick={() => setTab(!tab)}
+            >
+              logs
+            </button>
           </div>
+          {!tab && (
+            <Link to="create-log">
+              <NavBtn
+                spcstyling={"text-white w-24 bg-gray-600"}
+                val="create log"
+              />
+            </Link>
+          )}
+        </nav>
+      </div>
       <div>
-        {tab ?  
-        <div className="w-full"> 
-        <p className="py-4 text-base font-bold tracking-widest text-center capitalize">{projectName}</p>
-        <figure className="w-full bg-gray-900 h-36 rounded-2xl"></figure>
-        <div className="grid grid-cols-2 gap-3 py-3">
-<OverviewGridItem icon={<DocumentIcon />} val={projectName} />
-<OverviewGridItem icon={<UserIcon />} val={clientName} />
-<OverviewGridItem icon={<MailIcon />} val={clientEmail} />
-<OverviewGridItem icon={<MobileIcon />} val={clientPhone} />
-<OverviewGridItem icon={<DollarIcon />} val={rate} />
-<OverviewGridItem icon={<BriefIcon />} val={brief} span="col-span-2" iconplacement="flex" />
-        </div>
-        </div>
-        : 
-        <div className="w-full bg-red-500 h-96">
-          </div>}
+        {tab ? (
+          <div className="w-full">
+            <p className="py-4 text-base font-bold tracking-widest text-center capitalize">
+              {projectName}
+            </p>
+            <figure className="w-full bg-gray-900 h-36 rounded-2xl"></figure>
+            <div className="grid grid-cols-2 gap-3 py-3">
+              <OverviewGridItem
+                icon={<DocumentIcon value={true} />}
+                val={projectName}
+              />
+              <OverviewGridItem
+                icon={<UserIcon value={true} />}
+                val={clientName}
+              />
+              <OverviewGridItem
+                icon={<MailIcon value={true} />}
+                val={clientEmail}
+              />
+              <OverviewGridItem
+                icon={<MobileIcon value={true} />}
+                val={clientPhone}
+              />
+              <OverviewGridItem icon={<DollarIcon value={true} />} val={rate} />
+              <OverviewGridItem
+                icon={<BriefIcon value={true} />}
+                val={brief}
+                span="col-span-2"
+                iconplacement="flex"
+              />
+            </div>
+          </div>
+        ) : (
+          <div>
+            {emptyLog ? (
+              <>
+                <div className="  min-h-[500px]">
+                  <div className="grid gap-1 w-full">
+                    {logList.map((p, i) => (
+                      <Link key={i} to={`logs/${p}`}>
+                        <button className="w-full p-2 text-left bg-gray-100 hover:bg-gray-200 transition-all relative rounded first-letter:capitalize">
+                          {p}
+                          <span className="absolute right-2 top-1/2 -translate-y-1/2">
+                            <LogIcon />
+                          </span>
+                        </button>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex w-full justify-center">
+                  <div className="flex gap-3">
+                    {" "}
+                    <PaginationBtn icon={<PaginationLeft />} />
+                    <PaginationBtn icon={<PaginationRight />} />{" "}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="bg-gray-50 rounded h-[500px] grid place-content-center w-full">
+                <p className="italic text-[12px] px-3 text-center">
+                  {" "}
+                  No logs has been started yet. Click the 'create log' button to
+                  start a new one{" "}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

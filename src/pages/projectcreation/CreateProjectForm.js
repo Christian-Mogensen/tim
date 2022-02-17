@@ -25,22 +25,22 @@ const activestyle = "w-[15px] h-[15px] bg-gray-600 graphicelem"
 
 const CreateProjectForm = () => {
   const [page, setPage] = useState(1);
-  const [data, setData] = useState({
-    user: {},
-    profile: {},
-    settings: {},
-  });
+  // const [data, setData] = useState({
+  //   user: {},
+  //   profile: {},
+  //   settings: {},
+  // });
 
   function goNextPage() {
     if (page === 6) return;
     setPage((page) => page + 1);
   }
 
-  function updateData(type, newData) {
-    setData((data) => {
-      return { ...data, [type]: newData };
-    });
-  }
+  // function updateData(type, newData) {
+  //   setData((data) => {
+  //     return { ...data, [type]: newData };
+  //   });
+  // }
   const {projectname, clientname, clientEmail, clientPhonenumber, rate, brief}=useContext(ProjectContext)
   const { slug } = useParams();
   const user = useAuthState(auth);
@@ -79,22 +79,34 @@ const CreateProjectForm = () => {
 
         {/* the content goes here */}
 
-        {page === 1 && <OnboardingOne data={data.user} update={updateData} />}
+        {page === 1 && <OnboardingOne 
+        // data={data.user} update={updateData} 
+        />}
         {page === 2 && (
-          <OnboardingTwo data={data.profile} update={updateData} />
+          <OnboardingTwo 
+          // data={data.profile} update={updateData} 
+          />
         )}
 
         {page === 3 && (
-          <OnboardingThree data={data.settings} update={updateData} />
+          <OnboardingThree
+          //  data={data.settings} update={updateData} 
+           />
         )}
         {page === 4 && (
-          <OnboardingFour data={data.settings} update={updateData} />
+          <OnboardingFour 
+          // data={data.settings} update={updateData} 
+          />
         )}
         {page === 5 && (
-          <OnboardingFive data={data.settings} update={updateData} />
+          <OnboardingFive 
+          // data={data.settings} update={updateData} 
+          />
         )}
         {page === 6 && (
-          <OnboardingSix data={data.settings} update={updateData} />
+          <OnboardingSix 
+          // data={data.settings} update={updateData} 
+          />
         )}
 
         {page !== 6 && (
