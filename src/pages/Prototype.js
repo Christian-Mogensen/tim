@@ -6,7 +6,7 @@ import BackComp from "../components/btns/BackComp";
 import { auth, db } from "../firebase/firebase";
 
 const Prototype = () => {
-  const { slug } = useParams();
+  const { projectSlug } = useParams();
 const [projectName, setProjectName] = useState()
 
   const user = useAuthState(auth);
@@ -15,7 +15,7 @@ const userId = user[0]?.uid;
   useEffect(()=>{
     (async()=>{
 
-      const docRef = doc(db, "users", userId, `project/${slug}`);
+      const docRef = doc(db, "users", userId, `project/${projectSlug}`);
       const docSnap = await getDoc(docRef);
       const docData = docSnap.data()
 
@@ -44,7 +44,7 @@ const userId = user[0]?.uid;
 <>
     <BackComp href='/dashboard'/>
     <div className="w-full bg-gray-50 min-h-[calc(100vh-162px)] grid place-content-center">
-      <span className="text-7xl capitalize tracking-widest">{projectName}</span></div>
+      <span className="tracking-widest capitalize text-7xl">{projectName}</span></div>
 </>
   );
 }

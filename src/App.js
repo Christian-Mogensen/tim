@@ -14,7 +14,7 @@ import Register from "./pages/usercreation/Register";
 import Reset from "./pages/usercreation/Resetpw";
 import Dashboard from "./pages/usercreation/userdashboard/Dashboard";
 import "./styles/index.css";
-import "./styles/react-tabs.css";
+import "./styles/stopwatchcircle.css";
 
 function App() {
   return (
@@ -28,9 +28,9 @@ function App() {
           <Route exact path="/reset" element={<Reset />} />
 
           <Route exact path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/:slug" element={<ProjectOverview />} />
-          <Route path="/dashboard/:slug/logs/:slug" element={<LogReceipt />} />
-          <Route path="/dashboard/:slug/create-log" element={<CreateLog />} />
+          <Route path="/dashboard/:projectSlug" element={<ProjectOverview />} />
+          <Route path="/dashboard/:projectSlug/logs/:logSlug" element={<LogReceipt />} />
+          <Route path="/dashboard/:projectSlug/create-log" element={<CreateLog />} />
           <Route
             path="/dashboard/createprojectform"
             element={<CreateProjectForm />}

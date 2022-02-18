@@ -35,9 +35,9 @@ const Nav = () => {
     fetchUserName();
   }, [user, loading]);
   const urlparam = useLocation();
-  const {slug } = useParams()
+  const {projectSlug } = useParams()
 
-  console.log();
+
   const urlparampath = urlparam.pathname;
   const [projectName, setProjectName] = useState()
 
@@ -46,11 +46,11 @@ const userId = user?.uid;
   useEffect(()=>{
     (async()=>{
 
-      const docRef = doc(db, "users", userId, `project/${slug}`);
+      const docRef = doc(db, "users", userId, `project/${projectSlug}`);
       const docSnap = await getDoc(docRef);
       const docData = docSnap.data()
 
-      console.log(docData.project);
+
       if (docSnap.exists()) {
         setProjectName(docData.project)
         // setStateAlphaVal({x:docData.brightness.x})
@@ -64,7 +64,6 @@ const userId = user?.uid;
     })()
   },[])
 
-console.log(urlparampath);
   if (urlparampath === "/") {
     return (
       <nav className="flex items-center w-full px-3 h-14 bg-gray-50">

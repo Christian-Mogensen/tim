@@ -1,40 +1,43 @@
-import { doc, getDoc } from 'firebase/firestore';
-import React, { useEffect } from 'react'
+import { collection, doc, getDoc, getDocFromCache, getDocFromServer, query } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import BackIcon from '../assets/img/icons/BackIcon';
+import BackComp from '../components/btns/BackComp';
+import BBtn from '../components/btns/BBtn';
 import { auth, db } from '../firebase/firebase';
+import {CircularProgressbar} from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css';
 
 const LogReceipt = () => {
     const user = useAuthState(auth);
-    const userId = user?.uid;
-    const {slug} =useParams()
+    const userId = user[0]?.uid;
     
-    useEffect(() => {
-        (async () => {
-          const docRef = doc(db,'logs', slug);
-          const docSnap = await getDoc(docRef);
-          console.log(docSnap.id);
-          const docData = docSnap.data();
-          
-          // console.log(docData.project);
-          if (docSnap.exists()) {
-              console.log(docData);
-            // setProjectName(docData.project);
-            // setClientName(docData.name);
-            // setClientPhone(docData.phone);
-            // setClientEmail(docData.email);
-            // setBrief(docData.brief);
-            // setRate(docData.rate);
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-          }
+    const {projectSlug, logSlug} =useParams()
+    const [userDetails, setUserDetails] = useState('')
+     useEffect(() => {
+       (async () => {
+         
+         const docRef = doc(db, "users", userId, "project", projectSlug, "logs", logSlug);
+         const docSnap = await getDoc(docRef);
+console.log(docSnap.data());
+        
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+          setUserDetails(docSnap.data().creation.seconds)
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
         })();
-      }, []);
-    
+       }, []);
 
-  return (
-    <div>LogReceipt</div>
+        return (
+    <div>
+      <BBtn />
+      <h1>{userDetails}</h1>
+
+    </div>
   )
 }
 

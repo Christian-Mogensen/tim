@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 
 const TimeContext = createContext();
 
@@ -14,7 +14,9 @@ const TimeProvider = ({ children }) => {
   const [startHour, setStartHour] = useState(null);
   const [startDay, setStartDay] = useState(null);
   const [startMonth, setStartMonth] = useState(null);
-
+// const [elapseHour, setElapseHour] = useState(0)
+// const [elapseMin, setElapseMin] = useState(0)
+// const [elapseSec, setElapseSec] = useState(0)
   // elapses time
   const [s, setS] = useState(null);
   const [time, setTime] = useState(0);
@@ -26,8 +28,19 @@ const TimeProvider = ({ children }) => {
   const [endDay, setEndDay] = useState(null);
   const [endMonth, setEndMonth] = useState(null);
 
+// useEffect(()=>{
+
+//   setElapseHour(("0" + Math.floor((time / 3600000) % 60)).slice(-2)),
+//   setElapseMin(("0" + Math.floor((time / 60000) % 60)).slice(-2)),
+//   setElapseSec(("0" + Math.floor((time / 1000) % 60)).slice(-2)),
+  
+// },[])
+
   const valueLib = useMemo(
     () => ({
+      // elapseHour, setElapseHour,
+      // elapseMin, setElapseMin,
+      // elapseSec, setElapseSec,
       startDay,
       setStartDay,
       startMonth,
@@ -63,6 +76,9 @@ const TimeProvider = ({ children }) => {
       kill, setKill
     }),
     [
+      // elapseSec,
+      // elapseMin,
+      // elapseHour,
       kill,
       time,
       start,

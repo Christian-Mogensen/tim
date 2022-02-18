@@ -16,9 +16,10 @@ import PaginationBtn from "../components/btns/PaginationBtn";
 import LogIcon from "../assets/img/icons/LogIcon";
 import PaginationLeft from "../assets/img/icons/PaginationLeft";
 import PaginationRight from "../assets/img/icons/PaginationRight";
+import BBtn from "../components/btns/BBtn";
 
 const ProjectOverview = () => {
-  const { slug } = useParams();
+  const { projectSlug } = useParams();
   const [projectName, setProjectName] = useState();
   const [clientName, setClientName] = useState();
   const [clientPhone, setClientPhone] = useState();
@@ -30,7 +31,7 @@ const ProjectOverview = () => {
   const userId = user[0]?.uid;
   useEffect(() => {
     (async () => {
-      const docRef = doc(db, "users", userId, `project/${slug}`);
+      const docRef = doc(db, "users", userId, `project/${projectSlug}`);
       const docSnap = await getDoc(docRef);
       const docData = docSnap.data();
 
@@ -61,13 +62,13 @@ const ProjectOverview = () => {
   useEffect(() => {
     (async () => {
       const querySnapshot = await getDocs(
-        collection(db, "users", userId, "project", slug, "logs")
+        collection(db, "users", userId, "project", projectSlug, "logs")
       );
       querySnapshot.forEach((doc) => {
-        console.log(doc.id);
-        console.log(doc.data());
-        console.log(logList);
-        setLogList((prevLogList) => [...prevLogList, doc.id]);
+        // console.log(doc.data());
+        // console.log(logList);
+        setLogList((prevLogList) => [ ...prevLogList, doc.id]);
+
         setEmptyLog(logList.length >= 0);
       });
     })();
@@ -75,7 +76,7 @@ const ProjectOverview = () => {
   return (
     <div className="max-w-xl m-auto">
       <div className="flex items-center justify-between w-full">
-        <BackComp href="/dashboard" />
+        <BBtn />
         <div className="">
           <span className="text-[12px] tracking-widest capitalize ">
             {projectName} / logs
@@ -83,7 +84,7 @@ const ProjectOverview = () => {
         </div>
       </div>
       <div className="h-[42px]">
-        <nav className="flex justify-between items-center">
+        <nav className="flex items-center justify-between">
           <div>
             <button
               className={`transitionspeed w-[120px] capitalize p-2 ${
@@ -109,7 +110,7 @@ const ProjectOverview = () => {
           {!tab && (
             <Link to="create-log">
               <NavBtn
-                spcstyling={"text-white w-24 bg-gray-600"}
+                spcstyling={"text-white w-28 bg-gray-600"}
                 val="create log"
               />
             </Link>
@@ -154,12 +155,12 @@ const ProjectOverview = () => {
             {emptyLog ? (
               <>
                 <div className="  min-h-[500px]">
-                  <div className="grid gap-1 w-full">
+                  <div className="grid w-full gap-1">
                     {logList.map((p, i) => (
                       <Link key={i} to={`logs/${p}`}>
-                        <button className="w-full p-2 text-left bg-gray-100 hover:bg-gray-200 transition-all relative rounded first-letter:capitalize">
+                        <button className="relative w-full p-2 text-left transition-all bg-gray-100 rounded hover:bg-gray-200 first-letter:capitalize">
                           {p}
-                          <span className="absolute right-2 top-1/2 -translate-y-1/2">
+                          <span className="absolute -translate-y-1/2 right-2 top-1/2">
                             <LogIcon />
                           </span>
                         </button>
@@ -167,7 +168,7 @@ const ProjectOverview = () => {
                     ))}
                   </div>
                 </div>
-                <div className="flex w-full justify-center">
+                <div className="flex justify-center w-full">
                   <div className="flex gap-3">
                     {" "}
                     <PaginationBtn icon={<PaginationLeft />} />

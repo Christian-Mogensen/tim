@@ -42,7 +42,7 @@ const CreateProjectForm = () => {
   //   });
   // }
   const {projectname, clientname, clientEmail, clientPhonenumber, rate, brief}=useContext(ProjectContext)
-  const { slug } = useParams();
+  // const { projectSlug } = useParams();
   const user = useAuthState(auth);
   const userId = user[0]?.uid;
     console.log(user);

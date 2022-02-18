@@ -56,8 +56,8 @@ function Dashboard() {
   return (
     <div className="max-w-7xl">
       <div className="relative right-0 max-w-xl m-auto">
-        <nav className="grid grid-cols-2 pb-4  gap-2 w-full">
-          <h1 className=" text-base font-bold tracking-wide text-gray-600 ">
+        <nav className="grid w-full grid-cols-2 gap-2 pb-4">
+          <h1 className="text-base font-bold tracking-wide text-gray-600 ">
             Projects
           </h1>
           <Link
@@ -65,30 +65,30 @@ function Dashboard() {
             className="grid w-full place-content-end"
           >
             <NavBtn
-              spcstyling={"text-white w-24 bg-gray-600"}
+              spcstyling={"text-white w-28 bg-gray-600"}
               val="create project"
             />
           </Link>
-          <div className="grid grid-cols-3 h-8 overflow-hidden border rounded border-gray-300 w-20 ">
-            <span className=" col-span-2 place-self-center text-base tracking-wider">
+          <div className="grid w-20 h-8 grid-cols-3 overflow-hidden border border-gray-300 rounded ">
+            <span className="col-span-2 text-base tracking-wider place-self-center">
               {yeardatefilter}
             </span>
-            <button className=" w-full h-full grid place-content-center hover:bg-gray-600 yearhovereffect">
+            <button className="grid w-full h-full place-content-center hover:bg-gray-600 yearhovereffect">
               <ArrowDown hover="hovereffectchild" />
             </button>
           </div>
         </nav>
         {emptyProj ? (<>
           <div className="  min-h-[500px]">
-            <div className="grid gap-1 w-full">
+            <div className="grid w-full gap-1">
               {projectList.map((p, i) => (
                 <Link key={i} to={`${p}`}>
                   <button
                     
-                    className="w-full p-2 text-left bg-gray-100 hover:bg-gray-200 transition-all relative rounded first-letter:capitalize"
+                    className="relative w-full p-2 text-left transition-all bg-gray-100 rounded hover:bg-gray-200 first-letter:capitalize"
                   >
                     {p}
-                    <span className="absolute right-2 top-1/2 -translate-y-1/2">
+                    <span className="absolute -translate-y-1/2 right-2 top-1/2">
                       <DocIcon />
                     </span>
                   </button>
@@ -96,7 +96,7 @@ function Dashboard() {
               ))}
             </div>
             </div>
-            <div className="flex w-full justify-center">
+            <div className="flex justify-center w-full">
               <div className="flex gap-3">
                 {" "}
                 <PaginationBtn icon={<PaginationLeft />} />

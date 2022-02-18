@@ -1,14 +1,14 @@
 
-import { addDoc, collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
+import StopWatch from '../components/stopwatch/Stopwatch';
 import { auth, db } from '../firebase/firebase';
 
 const CreateLog = () => {
     const user = useAuthState(auth);
     const userId = user[0]?.uid;
-    const {slug} = useParams()
+    const {projectSlug} = useParams()
     // let logId;
 
     // const [logId, setLogId] = useState()
@@ -29,7 +29,7 @@ const CreateLog = () => {
     // console.log(logId);
     const createDoc = async() =>{
 
-    await addDoc(collection(db, 'users', userId , 'project',slug,'logs'), {
+    await addDoc(collection(db, 'users', userId , 'project',projectSlug,'logs'), {
         title:'',
         resume:'',
         elapsed:'',    
@@ -40,9 +40,15 @@ const CreateLog = () => {
 
 
   return (
-    <div className='max-w-sm m-auto bg-gray-100 h-[500px]'>
+    <div className='max-w-sm m-auto'>
+      
         <h1 className='text-center'>CreateLog</h1>
-        <button onClick={createDoc}>create doc</button>
+        <h2>Timer</h2>
+        <div className=''>
+<StopWatch />
+</div>
+
+        {/* <button onClick={createDoc}>create doc</button> */}
         </div>
   )
 }
