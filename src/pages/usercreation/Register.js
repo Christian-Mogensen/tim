@@ -27,12 +27,15 @@ function Register() {
   const register = (e) => {
     e.preventDefault()
     if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, email, password);
+    // setTimeout(()=>{
+
+      registerWithEmailAndPassword(name, email, password);
+    // }, 5000)
   };
 
   useEffect(() => {
     if (loading) return;
-    if (user) navigate("/dashboard");
+    if (user) navigate("/");
   }, [user, loading]);
 
   return (

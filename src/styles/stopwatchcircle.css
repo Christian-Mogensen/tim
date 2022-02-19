@@ -15,14 +15,26 @@
      */
     vertical-align: middle;
   }
-  
   .CircularProgressbar .CircularProgressbar-path {
     stroke: rgb(75 85 99);
     stroke-width: 1px;
     /* stroke-dasharray: 20px; */
     stroke-linecap: round;
-    -webkit-transition: stroke-dashoffset 1s ease-in-out;
-    transition: stroke-dashoffset 1s ease-in-out;
+    -webkit-transition: stroke-dashoffset 0.3s ease-in-out;
+    transition: stroke-dashoffset 0.3s ease-in-out;
+  }
+  .circleBar:nth-of-type(even) .CircularProgressbar .CircularProgressbar-path{
+    /* stroke: rgb(11, 77, 170); */
+    animation: colorflow 60s ease;
+  }
+  @keyframes colorflow {
+    0%{
+      stroke: rgba(75, 85, 99,0)
+    }
+    100%{
+      stroke: rgba(75, 85, 99,1)
+    }
+    
   }
   
   .CircularProgressbar .CircularProgressbar-trail {

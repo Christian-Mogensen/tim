@@ -4,7 +4,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
 import StopWatch from '../components/stopwatch/Stopwatch';
 import { auth, db } from '../firebase/firebase';
-
+import FormHeader from '../components/form/FormHeader'
+import BBtn from '../components/btns/BBtn';
+import { getDate, getMonth, getYear } from 'date-fns';
+import { format } from 'date-fns/esm';
 const CreateLog = () => {
     const user = useAuthState(auth);
     const userId = user[0]?.uid;
@@ -37,16 +40,23 @@ const CreateLog = () => {
          });
       };
 
-
-
+      const dateNum = getDate(new Date())
+      const dateMonth = getMonth(new Date())
+      const dateMonthForm = format(dateMonth, 'MMMM')
+      const dateYear = getYear(new Date())
   return (
     <div className='max-w-sm m-auto'>
-      
-        <h1 className='text-center'>CreateLog</h1>
-        <h2>Timer</h2>
-        <div className=''>
-<StopWatch />
-</div>
+      <BBtn />
+        <FormHeader val="Create log" />
+        <div className=' relative'>
+        <div className='absolute right-1 top-1 text-right text-[12px]'>
+          <p>{dateNum}</p>
+          <p>{dateMonthForm}</p>
+          <p>{dateYear}</p>
+        </div>
+        <h2 className='font-bold'>Timer</h2>
+<StopWatch yearprop={dateYear} monthprop={dateMonthForm} dateprop={dateNum} />
+        </div>
 
         {/* <button onClick={createDoc}>create doc</button> */}
         </div>
