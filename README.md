@@ -15,3 +15,7 @@ Its a reverse to-do app. Its more like a "what i did" app. The complex part of t
 - To use packages and manipulate them in order to create the visual effect i wanted. E.g. There is a stopwatch feature and it has a graphical element that progress's a circle. I found a progress bar package and combined it with some stopwatch logic.
 
 - I learned to work with posting data and dynamicly generating pages in firebase.
+
+## What would i do differently next time?
+
+- I would use nextjs or maybe Remix instead of CRA... I dont particularly like the rendering method the uses atm.
