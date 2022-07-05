@@ -18,4 +18,5 @@ Its a reverse to-do app. Its more like a "what i did" app. The complex part of t
 
 ## What would i do differently next time?
 
-- I would use nextjs or maybe Remix instead of CRA... I dont particularly like the rendering method the uses atm.
+- I would use nextjs or maybe Remix instead of CRA... I dont particularly like the rendering method the uses atm. 
+- And for god sake... Excecuting the project. Do mobile first! I dont understand why I still keep making that mistake. 
